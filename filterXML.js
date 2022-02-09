@@ -3,6 +3,7 @@ let parser = require('xml2json');
 let excel = require('excel4node');
 let workbook = new excel.Workbook();
 let worksheet = workbook.addWorksheet('Sheet 1');
+let getContent = 'Enscape'
 
 function GetStringFromXML(GetString)
 {
@@ -32,6 +33,18 @@ function GetStringFromXML(GetString)
                             resultArry.push(obj);
                         }
                     }
+                    if(elmlanguageGrp.termGrp[0].descripGrp !== undefined && elmlanguageGrp.termGrp[0].descripGrp.length == 1)
+                    {
+                        if(elmlanguageGrp.termGrp[0].descripGrp[0].descrip[0]._ === GetString)
+                        {
+                            let obj = { 'alternativeId': elementConceptGrp.concept[0].$.alternativeId,
+                                        'tekst': elmlanguageGrp.termGrp[0].term[0],
+                                        'Context':  elmlanguageGrp.termGrp[0].descripGrp[0].descrip[0]._,
+                                        'taal': elmlanguageGrp.language[0].$.type
+                            };
+                            resultArry.push(obj);
+                        }
+                    }
                         }catch(err)
                         {
                             console.log(elmlanguageGrp);
@@ -46,7 +59,7 @@ function GetStringFromXML(GetString)
   });
 }
 
-GetStringFromXML('Enscape').then(StringArray=>{
+GetStringFromXML(getContent).then(StringArray=>{
     console.log(StringArray);
     ExportToExcel(StringArray);
 });

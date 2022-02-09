@@ -1,12 +1,7 @@
 // Require library
-var excel = require('excel4node');
-
-// Create a new instance of a Workbook class
-var workbook = new excel.Workbook();
-
-// Add Worksheets to the workbook
-var worksheet = workbook.addWorksheet('Sheet 1');
-var worksheet2 = workbook.addWorksheet('Sheet 2');
+let excel = require('excel4node');
+let workbook = new excel.Workbook();
+let worksheet = workbook.addWorksheet('Sheet 1');
 
 // Create a reusable style
 var style = workbook.createStyle({
